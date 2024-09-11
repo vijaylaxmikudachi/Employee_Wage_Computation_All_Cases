@@ -15,26 +15,10 @@ public class Emp_Wage {
         int totalHours = 0;
         int totalDays = 0;
 
-        // Randomly determine the working hours until the condition is met
-        Random random = new Random();
-
+        // Calculate wages until total hours or days limit is reached
         while (totalHours < MAX_WORKING_HOURS && totalDays < MAX_WORKING_DAYS) {
-            int employeeType = random.nextInt(3); // 0 for absent, 1 for full-time, 2 for part-time
+            int workingHours = getWorkHours();
 
-            int workingHours = 0;
-            switch (employeeType) {
-                case 1: // Full-time
-                    workingHours = FULL_DAY_HOURS;
-                    break;
-                case 2: // Part-time
-                    workingHours = PART_TIME_HOURS;
-                    break;
-                default: // Absent
-                    workingHours = 0;
-                    break;
-            }
-
-            // Update total working hours and days
             if (workingHours > 0) {
                 totalDays++;
             }
@@ -50,4 +34,20 @@ public class Emp_Wage {
         System.out.println("Total Hours Worked: " + totalHours);
         System.out.println("Total Days Worked: " + totalDays);
     }
+
+    // Function to get working hours for the day based on employee type
+    public static int getWorkHours() {
+        Random random = new Random();
+        int employeeType = random.nextInt(3); // 0 for absent, 1 for full-time, 2 for part-time
+
+        switch (employeeType) {
+            case 1: // Full-time
+                return FULL_DAY_HOURS;
+            case 2: // Part-time
+                return PART_TIME_HOURS;
+            default: // Absent
+                return 0;
+        }
+    }
 }
+
